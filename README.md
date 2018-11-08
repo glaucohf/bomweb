@@ -1,2 +1,0 @@
-# bomweb
-Arquivos do bomweb
