@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="hsqldb">
+		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<!-- <property name="hibernate.connection.url">jdbc:hsqldb:file:bomweb;shutdown=true;hsqldb.write_delay=false;</property> -->
+		<property name="hibernate.connection.url">jdbc:hsqldb:mem:bomweb</property>
+		<property name="hibernate.connection.username">sa</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+		<property name="hibernate.connection.autocommit">true</property>
+		<property name="hibernate.connection.pool_size">1</property>
+		<property name="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+
+		<!-- Development -->
+		<property name="hibernate.hbm2ddl.auto">create-drop</property>
+		<!-- Development -->
+
+		<!-- Verbosity -->
+		<!-- <property name="hibernate.show_sql">true</property> -->
+		<!-- <property name="hibernate.format_sql">true</property> -->
+		<!-- Verbosity -->
+
+		<mapping class="br.com.fetranspor.bomweb.entity.Usuario" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Perfil" />
+		<mapping class="br.com.fetranspor.bomweb.entity.UsuarioPerfil" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Permissao" />
+		<mapping class="br.com.fetranspor.bomweb.entity.PerfilPermissao" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Uri" />
+		<mapping class="br.com.fetranspor.bomweb.entity.UriPermissao" />
+		<mapping class="br.com.fetranspor.bomweb.entity.BomWebRevisionEntity" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Empresa" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Linha" />
+		<mapping class="br.com.fetranspor.bomweb.entity.TipoDeLinha" />
+		<mapping class="br.com.fetranspor.bomweb.entity.TipoDeLinhaTipoDeVeiculo" />
+		<mapping class="br.com.fetranspor.bomweb.entity.LinhaVigenciaTipoDeLinha" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Secao" />
+		<mapping class="br.com.fetranspor.bomweb.entity.TipoDeVeiculo" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Tarifa" />
+		<mapping class="br.com.fetranspor.bomweb.entity.LinhaVigencia" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Bom" />
+		<mapping class="br.com.fetranspor.bomweb.entity.BomLinha" />
+		<mapping class="br.com.fetranspor.bomweb.entity.BomSecao" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Configuracao" />
+		<mapping class="br.com.fetranspor.bomweb.entity.Justificativa" />
+
+		<!-- Envers -->
+		<!--   <listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-insert" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-update" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-delete" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="pre-collection-update" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="pre-collection-remove" />
+		<listener class="org.hibernate.envers.event.AuditEventListener"
+			type="post-collection-recreate" /> -->
+		<!-- Envers -->
+	</session-factory>
+</hibernate-configuration>

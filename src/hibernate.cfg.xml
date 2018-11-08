@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory name="">
+        <property name="hibernate.default_batch_fetch_size">20</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/bomweb</property>
+        <property name="hibernate.connection.username">bomweb_user</property>
+        <property name="hibernate.connection.password">b0mW3b_us3r</property>
+
+        <!-- Development -->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <!-- Development -->
+
+        <!-- Verbosity -->
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.format_sql">false</property>
+        <!-- Verbosity -->
+
+        <!-- C3P0 Connection Pool -->
+        <property name="hibernate.c3p0.acquire_increment">3</property>
+        <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="hibernate.c3p0.idle_test_period">1500</property> <!-- seconds -->
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.max_statements">0</property>
+        <property name="hibernate.c3p0.min_size">3</property>
+        <property name="hibernate.c3p0.timeout">1000</property> <!-- seconds -->
+        <property name="hibernate.c3p0.unreturnedConnectionTimeout">3600</property> <!-- seconds -->
+        <!-- C3P0 Connection Pool -->
+
+        <mapping class="br.com.fetranspor.bomweb.entity.Usuario" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Perfil" />
+        <mapping class="br.com.fetranspor.bomweb.entity.UsuarioPerfil" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Permissao" />
+        <mapping class="br.com.fetranspor.bomweb.entity.PerfilPermissao" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Uri" />
+        <mapping class="br.com.fetranspor.bomweb.entity.UriPermissao" />
+        <mapping class="br.com.fetranspor.bomweb.entity.BomWebRevisionEntity" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Empresa" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Linha" />
+        <mapping class="br.com.fetranspor.bomweb.entity.TipoDeLinha" />
+        <mapping class="br.com.fetranspor.bomweb.entity.TipoDeLinhaTipoDeVeiculo" />
+        <mapping class="br.com.fetranspor.bomweb.entity.LinhaVigenciaTipoDeLinha" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Secao" />
+        <mapping class="br.com.fetranspor.bomweb.entity.TipoDeVeiculo" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Tarifa" />
+        <mapping class="br.com.fetranspor.bomweb.entity.LinhaVigencia" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Bom" />
+        <mapping class="br.com.fetranspor.bomweb.entity.BomLinha" />
+        <mapping class="br.com.fetranspor.bomweb.entity.BomSecao" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Configuracao" />
+        <mapping class="br.com.fetranspor.bomweb.entity.Justificativa" />
+        <mapping class="br.com.fetranspor.bomweb.entity.BomReabertura" />
+
+        <!-- Envers -->
+        <listener class="org.hibernate.envers.event.AuditEventListener"
+            type="post-insert" />
+        <listener class="org.hibernate.envers.event.AuditEventListener"
+            type="post-update" />
+        <listener class="org.hibernate.envers.event.AuditEventListener"
+            type="post-delete" />
+        <listener class="org.hibernate.envers.event.AuditEventListener"
+            type="pre-collection-update" />
+        <listener class="org.hibernate.envers.event.AuditEventListener"
+            type="pre-collection-remove" />
+        <listener class="org.hibernate.envers.event.AuditEventListener"
+            type="post-collection-recreate" />
+        <!-- Envers -->
+    </session-factory>
+</hibernate-configuration>

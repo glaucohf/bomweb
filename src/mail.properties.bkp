@@ -1,0 +1,7 @@
+hostname=64.233.190.108
+username=ditpa@bomwebdetro.com.br
+password=123@Mudar
+port=587
+use_authentication=true
+use_ssl=true
+use_tls=false

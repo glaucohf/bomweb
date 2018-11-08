@@ -1,0 +1,38 @@
+#modalView {display:none;}
+
+/* Overlay */
+#simplemodal-overlay
+{
+	background-color: rgba( 190, 190, 190, .5 );
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+/* Container */
+#simplemodal-container
+{
+	display: none;
+	padding: 6px;
+	border: 5px solid #dfecf5;
+	background-color: #ffffff;
+	z-index: 1002;
+	overflow: hidden;
+	min-width: 400px;
+	max-width: 700px;
+	background: #fff url(../images/modal_bg.png) repeat-x;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	color: #036;
+}
+#simplemodal-container .simplemodal-data
+{
+}
+#simplemodal-container code {
+}
+
+#simplemodal-container a {
+}
+
+#simplemodal-container a.modalCloseImg {
+}

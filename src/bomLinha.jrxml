@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bom" pageWidth="555" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="36"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#8FCCCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#CFE6E6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="CAMINHO_LOGO" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\java\\workspaces\\bomweb\\src\\main\\resources\\logo_relatorio.gif"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BOMSECAO_SUBREPORT" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\java\\workspaces\\bomweb\\src\\main\\resources\\secao.jasper"]]></defaultValueExpression>
+	</parameter>
+	<field name="bomDto.mes" class="java.lang.String"/>
+	<field name="bomDto.ano" class="java.lang.String"/>
+	<field name="bomDto.nomeEmpresa" class="java.lang.String"/>
+	<field name="siglaCodigoLinha" class="java.lang.String"/>
+	<field name="itinerarioIda" class="java.lang.String"/>
+	<field name="codigoLinha" class="java.lang.String"/>
+	<field name="numeroLinha" class="java.lang.String"/>
+	<field name="via" class="java.lang.String"/>
+	<field name="descricaoTipoVeiculo" class="java.lang.String"/>
+	<field name="tipoLigacao" class="java.lang.String"/>
+	<field name="tiposLinha" class="java.lang.String"/>
+	<field name="numeroPassageiros" class="java.lang.Long"/>
+	<field name="assentosOfertados" class="java.lang.Long"/>
+	<field name="kmsPercorridosPiso1" class="java.lang.Double"/>
+	<field name="kmsPercorridosPiso2" class="java.lang.Double"/>
+	<field name="kmsPercorridos" class="java.lang.Double"/>
+	<field name="extensaoPiso1" class="java.lang.Double"/>
+	<field name="extensaoPiso2" class="java.lang.Double"/>
+	<field name="extensaoTotal" class="java.lang.Double"/>
+	<field name="frota" class="java.lang.Integer"/>
+	<field name="viagensOrdinariasAB" class="java.lang.Integer"/>
+	<field name="viagensOrdinariasBA" class="java.lang.Integer"/>
+	<field name="viagensOrdinarias" class="java.lang.Long"/>
+	<field name="viagensExtraordinariasAB" class="java.lang.Integer"/>
+	<field name="viagensExtraordinariasBA" class="java.lang.Integer"/>
+	<field name="viagensExtraordinarias" class="java.lang.Long"/>
+	<field name="totalViagens" class="java.lang.Long"/>
+	<field name="receitaTotal" class="java.math.BigDecimal"/>
+	<field name="tarifa00Anterior" class="java.math.BigDecimal"/>
+	<field name="tarifa00" class="java.math.BigDecimal"/>
+	<field name="bomSecoesDto" class="java.util.Collection"/>
+	<field name="bomDto.dataFechamentoFormatada" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="109" splitType="Stretch">
+			<elementGroup/>
+			<staticText>
+				<reportElement x="105" y="10" width="405" height="58"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DETRO - BOLETIM DE OPERAÇÃO MENSAL]]></text>
+			</staticText>
+			<image hAlign="Center">
+				<reportElement x="10" y="10" width="97" height="58"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{CAMINHO_LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="477" y="83" width="33" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="510" y="83" width="39" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bomDto.ano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="456" y="83" width="20" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bomDto.mes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="423" y="83" width="33" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mês]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="78" y="83" width="344" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bomDto.nomeEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="83" width="73" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["RJ - " + $F{siglaCodigoLinha}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="76" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="342" y="54" width="213" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fechado em " + $F{bomDto.dataFechamentoFormatada}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="339" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" isPrintInFirstWholeBand="true"/>
+			</line>
+			<line>
+				<reportElement x="0" y="71" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="26" width="73" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Linha]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="78" y="26" width="65" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoLinha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="6" width="73" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome Ligação]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="78" y="6" width="471" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{itinerarioIda}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="46" width="73" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº da Linha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="26" width="28" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Via]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="26" width="78" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Ligação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="46" width="78" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Veículo]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="221" y="46" width="145" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{descricaoTipoVeiculo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="366" y="46" width="124" height="20" forecolor="#0000CC"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Caracteristica da Ligação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="77" width="135" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Passageiros Transportados]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="77" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de assentos médios por carro]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="315" y="77" width="46" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{assentosOfertados}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="77" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Frota Utilizada]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="77" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{frota}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="147" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KM Total Mensal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="147" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extensão Total]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="315" y="147" width="46" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{extensaoTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="187" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Receita]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="207" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarifa Anterior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="227" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tarifa Direta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="187" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Moeda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="315" y="187" width="46" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<text><![CDATA[R$]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="107" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Viag. Ordinária A-B]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="107" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{viagensOrdinariasAB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="127" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Viag. Ordinária B-A]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="127" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{viagensOrdinariasBA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="147" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub. Total Ordinária]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="147" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{viagensOrdinarias}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="167" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Viag. Extra A-B]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="167" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{viagensExtraordinariasAB}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="187" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Viag. Extra B-A]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="187" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{viagensExtraordinariasBA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="207" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sub. Total Extra]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="207" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{viagensExtraordinarias}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="396" y="227" width="103" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de Viagens]]></text>
+			</staticText>
+			<textField pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="499" y="227" width="50" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{totalViagens}]]></textFieldExpression>
+			</textField>
+			<subreport isUsingCache="false">
+				<reportElement x="3" y="270" width="549" height="63"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{bomSecoesDto})]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{BOMSECAO_SUBREPORT}]]></subreportExpression>
+			</subreport>
+			<textField evaluationTime="Band" pattern="#,###" isBlankWhenNull="true">
+				<reportElement x="140" y="77" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{numeroPassageiros}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="106" y="227" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tarifa00}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="106" y="207" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{tarifa00Anterior}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Band" pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="106" y="187" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{receitaTotal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="78" y="46" width="65" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numeroLinha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="171" y="26" width="195" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{via}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="444" y="26" width="105" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipoLigacao}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="490" y="46" width="59" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{tiposLinha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="315" y="107" width="46" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{extensaoPiso1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="106" y="107" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{kmsPercorridosPiso1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="107" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KM Mensal Piso I]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="315" y="127" width="46" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{extensaoPiso2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="106" y="127" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{kmsPercorridosPiso2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="127" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[KM Mensal Piso II]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="127" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extensão Piso II]]></text>
+			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="106" y="147" width="56" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{kmsPercorridos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="214" y="107" width="101" height="20" forecolor="#0000CC"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extensão Piso I]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="214" y="97" width="147" height="10" forecolor="#000000"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Extensão Ida e Volta]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

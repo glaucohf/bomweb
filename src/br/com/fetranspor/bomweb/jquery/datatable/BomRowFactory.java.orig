@@ -1,0 +1,123 @@
+package br.com.fetranspor.bomweb.jquery.datatable;
+
+import br.com.decatron.framework.jquery.datatable.JQueryDataTableRowFactory;
+import br.com.decatron.framework.security.AbstractAuthorization;
+<<<<<<< local
+import br.com.decatron.framework.util.Check;
+=======
+import br.com.fetranspor.bomweb.components.Utils;
+>>>>>>> other
+import br.com.fetranspor.bomweb.controller.BomController;
+import br.com.fetranspor.bomweb.entity.Bom;
+import br.com.fetranspor.bomweb.entity.Empresa;
+import br.com.fetranspor.bomweb.entity.Status;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+/**
+ * A factory for creating BomRow objects.
+ */
+public class BomRowFactory
+	extends JQueryDataTableRowFactory<BomRow, Bom>
+{
+
+	/**
+	 * <p>
+	 * Field <code>LOCALE_BR</code>
+	 * </p>
+	 */
+	private static final Locale LOCALE_BR = new Locale( "pt", "BR" );
+
+	/**
+	 * Instantiates a new bom row factory.
+	 *
+	 * @param abstractAuthorization
+	 *            the abstract authorization
+	 */
+	public BomRowFactory( final AbstractAuthorization abstractAuthorization )
+	{
+		super( abstractAuthorization );
+	}
+
+	/**
+	 * Instantiates a new bom row factory.
+	 *
+	 * @param abstractAuthorization
+	 *            the abstract authorization
+	 * @param controller
+	 */
+	public BomRowFactory( final AbstractAuthorization abstractAuthorization, final BomController controller )
+	{
+		this( abstractAuthorization );
+		this.controller = controller;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param bom
+	 * @return
+	 * @see br.com.decatron.framework.jquery.datatable.JQueryDataTableRowFactory#cria(java.lang.Object)
+	 */
+	@Override
+	public BomRow cria( final Bom bom )
+	{
+		final BomRow bomRow = new BomRow();
+
+		bomRow.id = bom.getId();
+
+		final Empresa empresa = bom.getEmpresa();
+		final Status status = bom.getStatus();
+		final String mesReferencia = bom.getMesReferencia();
+
+		bomRow.empresa = empresa.getNome();
+		bomRow.mesAnoReferencia = RowValueDate.valueOf( mesReferencia, "MM/yyyy" );
+		bomRow.status = status != null ? status.name() : null;
+		bomRow.statusPendencia = bom.getStatusPendencia();
+<<<<<<< local
+
+		final DateFormat simpleDateFormat = new SimpleDateFormat( "dd/MM/yyyy", LOCALE_BR );
+		if ( Check.isNotNull( bom.getDataLimiteFechamento() ) )
+		{
+			bomRow.dataLimiteFechamento = new RowValueDate( bom.getDataLimiteFechamento(), simpleDateFormat );
+		}// if
+			// FBW-676
+		if ( Check.isNotNull( this.controller ) )
+		{
+			bomRow.canReopen = ( bomRow.reopenStatus < 2 ) && this.controller.podeReabrirBomRegras( bom );
+		}
+		else
+		{
+			bomRow.canReopen = bomRow.getPodeReabrir();
+		}
+=======
+		bomRow.dataLimiteFechamento = new RowValueDate( bom.getDataLimiteFechamento(), Utils.DATE_DMY_FORMAT );
+		bomRow.reopenStatus = this.controller.getBomReopenLength( bom );
+		bomRow.canReopen = this.controller.podeReabrirBom( bom );
+>>>>>>> other
+		return bomRow;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 * @see br.com.decatron.framework.jquery.datatable.JQueryDataTableRowFactory#getRowClass()
+	 */
+	@Override
+	public Class<BomRow> getRowClass()
+	{
+		return BomRow.class;
+	}
+
+	/**
+	 * <p>
+	 * FBW-676 Field <code>controller</code>
+	 * </p>
+	 */
+	private BomController controller;
+}

@@ -1,0 +1,135 @@
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="security" uri="http://taglib.decatron.com.br/security" %>
+<tiles:insertTemplate template="/WEB-INF/jsp/layout/template.jsp">
+	<tiles:putAttribute name="header">
+		<script type="text/javascript" src="<c:url value="/jscript/jquery.dataTables.min.js" />"></script>
+		<script type="text/javascript" src="<c:url value="/jscript/ListPage.js" />"></script>
+	</tiles:putAttribute>
+	<tiles:putAttribute name="conteudo">
+	<script type="text/javascript">
+
+		var listPage;
+		$(document).ready(function() {
+			
+			listPage = new ListPage("/bomweb/bom", "BOM");
+			
+			listPage.setSearchFieldsIds(["idEmpresa", "mes_referencia"]);
+			
+			listPage.addColumnDefinition("Empresa", "empresa", {"sWidth": "50%"});
+			listPage.addColumnDefinition("Mês/Ano de Referência", "mesAnoReferencia", { fnRender: createRowDateValueRenderFunction( "mesAnoReferencia" ) } );
+	
+			listPage.setRenderActionColumnCallback(function(row) {
+				var html = '';
+				if (row.aData.podePreencher && row.aData.status != 'FECHADO') {
+					html += "<a href='/bomweb/bom/" + row.aData.id + "/linhas'>Preencher</a> &nbsp;";
+				}
+				if (row.aData.podeFechar && row.aData.status == 'PREENCHIDO') {
+					html += "<a href='/bomweb/bom/" + row.aData.id + "/fechar-confirm' onclick='javascript:ListPage.showModalPanel(this, event)' id='fecharBom'>Fechar</a> &nbsp;";
+				}
+				if (row.aData.podeVisualizar && row.aData.status == 'FECHADO') {
+					html += "<a href='/bomweb/bom/" + row.aData.id + "/visualizar' target='_blank'>Visualizar</a> &nbsp;";
+				}
+				if (row.aData.podeReabrir) {
+					if (row.aData.status == 'FECHADO' && row.aData.canReopen) {
+						html += "<a href='/bomweb/bom/" + row.aData.id + "/reabrir'>Reabrir</a> &nbsp;";
+					}
+					if (row.aData.status == 'REABERTO' || (row.aData.status == 'PREENCHIDO' && row.aData.statusPendencia == 'Reaberto')) {
+						html += "<a href='/bomweb/bom/" + row.aData.id + "/justificativas'>Visualizar Justificativas</a> &nbsp;";
+					}
+				}
+				
+				return html;
+			});
+			
+			if($("#perfil").val() == 'Empresa'){
+				listPage.initialize();
+			}
+				
+			
+		});
+	
+		//Auto complete da Busca
+		$(function() {
+
+			$( "#buscaEmp" ).autocomplete({
+				width:352,
+				source: function( request, response ) {
+					$.ajax({
+						url: "/bomweb/empresa/busca.json?term="+$( "#buscaEmp" ).val(),
+						dataType: "json",
+						data: {
+							featureClass: "P",
+							style: "full",
+							maxRows: 12,
+							name_startsWith: request.term
+						},
+						success: function( data ) {
+							response( $.map( data.empresa, function( item ) {
+								return {
+									value: item.nome,
+									data: item.id,
+									label: item.nome,
+								};
+							}));
+						}
+					});
+				},
+				minLength: 0,
+				select: function(event, ui) { 
+					$("#idEmpresa").val(ui.item.data);
+				 }
+			});
+			
+			$("#btn_pesquisa").click(function()
+				{
+				listPage.initialize();
+				}
+			);
+		});
+
+		</script>
+	
+		<security:notHasRole roleName="Empresa">
+		<strong class="titulo azul">Lista </strong><img src="<c:url value="/images/bomweb_setas.gif" />" /><strong class="titulo verde"> BOM</strong>
+		<a href="#" class="accordion">[ Ocultar Filtro ]</a>
+		<div id="filtro">
+			<img src="<c:url value="/images/bomweb_filtros_box_up.jpg" />" />
+			<form id="formPesquisa" action='<c:url value="/bom/list" />' method="post">
+				<fieldset>
+					<p>
+						<label for="buscaEmp">Empresa:</label>
+						<input type="text" id="buscaEmp" name="bom.empresa.nome" value="${bom.empresa.nome}" onblur="limpaId(this,'idEmpresa')" style="width:350px;"/>
+						<input type="text" id="idEmpresa" name="bom.empresa.id" value="${bom.empresa.id}" style="visibility: hidden;"/>
+					</p>
+					<p>					
+						<label for="mes_referencia">Mês/Ano de Referência:</label> 
+						<input type="text" id="mes_referencia" name="bom.mesReferencia" value="${bom.mesReferencia}" size="7"/>
+					</p>
+		    		<input type="button" name="btn_pesquisa" value="Pesquisar" id="btn_pesquisa">
+		    		<input class="reset" type="reset" value="Limpar"/>
+		    		<security:hasPermission target="Bom" action="pendentes" >
+						<input type="button" value="BOMs Pendentes" style="position:relative;left:70%;" onclick="window.location='<c:url value="/bom/pendentes" />'"/>
+					</security:hasPermission>
+		    	</fieldset>
+			</form>
+			<img src="<c:url value="/images/bomweb_filtros_box_dn.jpg" />" />
+		</div>
+		</security:notHasRole>
+		<input type="hidden" value="${perfil.nome}" id="perfil"/>
+		<security:hasRole roleName="Empresa">
+		<strong class="titulo azul">Lista </strong><img src="<c:url value="/images/bomweb_setas.gif" />" /><strong class="titulo verde"> BOM</strong>
+		</security:hasRole>
+		<br />
+		<security:hasPermission target="Bom" action="novo" >
+		<a id="insert" href="<c:url value="/bom/insert" />" class="buttom_azul">Novo BOM</a>
+		</security:hasPermission>
+		<security:hasRole roleName="Empresa">
+		<security:hasPermission target="Bom" action="pendentes" >
+		<a id="linkPendentes" href="<c:url value="/bom/pendentes"/>">BOMs Pendentes</a><br />
+		</security:hasPermission>
+		</security:hasRole>
+		<div id="divDataTable" style="width: 100%; overflow: auto;">
+		</div>
+    </tiles:putAttribute>
+</tiles:insertTemplate>
